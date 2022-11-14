@@ -1,6 +1,6 @@
 import React from "react"
 import { NumeralForm } from "../components/NumeralForm"
-import { NumeralList } from "../components/NumeralList"
+import { NumeralTable } from "../components/NumeralTable"
 import { NumeralModel } from "../models/NumberModel"
 
 export const NumeralContainer = () => {
@@ -10,7 +10,7 @@ export const NumeralContainer = () => {
             .then((response) => response.json())
             .then((response) => {
                 if (response.success && response.numerals) {
-                    setNumerals(response.numerals);
+                    setNumerals([...response.numerals]);
 
                 }
             })
@@ -22,8 +22,8 @@ export const NumeralContainer = () => {
 
     return (
         <>
-            <NumeralForm getNumbers={() => getNumbers()} />
-            <NumeralList numerals={numerals}/>
+            <NumeralForm getNumbers={getNumbers} />
+            <NumeralTable numerals={numerals}/>
         </>
     )
 }

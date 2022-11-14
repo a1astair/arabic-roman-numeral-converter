@@ -11,8 +11,20 @@ interface NumeralFormProps {
   getNumbers(): void;
 }
 
+
+
 export const NumeralForm = (props: NumeralFormProps) => {
   const [serverMessage, setServerMessage] = React.useState<string>("")
+
+  const renderServerMessage = (str: string) => {
+    if (str) {
+      setServerMessage(str);
+      setTimeout(() => {
+        setServerMessage("")
+      }, 2000)
+    }
+  }
+
   return (
     <div>
       <h2>Enter your number and pick your conversion</h2>
@@ -22,7 +34,6 @@ export const NumeralForm = (props: NumeralFormProps) => {
           convertTo: '',
         }}
         onSubmit={async (values) => {
-          console.log(values)
           try {
             const response = await fetch("http://localhost:3001/api/convert", {
               method: 'post',
@@ -30,12 +41,12 @@ export const NumeralForm = (props: NumeralFormProps) => {
               body: JSON.stringify(values)
             })
             const res = await response.json();
-            setServerMessage(res.message);
+            renderServerMessage(res?.message)
             if (res.success) {
               props.getNumbers()
             }
           } catch (err) {
-            setServerMessage("Error! Please try again");
+            renderServerMessage("Error! Please try again")
           }
         }}
       >
@@ -47,7 +58,7 @@ export const NumeralForm = (props: NumeralFormProps) => {
             <br/>
             <br/>
             <label htmlFor="convertTo">Convert to?</label>
-            <Select className="convert-to-dropdown" options={options} name="convertTo" onChange={(option) => setFieldValue("convertTo", option?.value)} />
+            <Select className="convert-to-dropdown" options={options} name="convertTo" onChange={(option) => setFieldValue("convertTo", option?.value)} required/>
             <br/>
             <button type="submit" disabled={isSubmitting}>
               Submit

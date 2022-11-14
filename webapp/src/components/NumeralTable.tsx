@@ -6,7 +6,7 @@ interface NumeralsObject {
     numerals: NumeralModel[]
 }
 
-export const NumeralList = (numeralsObject: NumeralsObject) => {
+export const NumeralTable = (numeralsObject: NumeralsObject) => {
     return (
         <div>
             {numeralsObject.numerals.length > 0 &&
@@ -20,8 +20,8 @@ export const NumeralList = (numeralsObject: NumeralsObject) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {numeralsObject.numerals.map((n: NumeralModel) => <tr key={n._id}>
-                                    <td>{new Date(n.createdAt).toString()}</td>
+                                {numeralsObject.numerals.map((n: NumeralModel, key) => <tr key={key}>
+                                    <td>{new Date(n.createdAt).toLocaleString()}</td>
                                     <td>{n.arabicNumeral}</td>
                                     <td>{n.romanNumeral}</td>
                                 </tr>)}
