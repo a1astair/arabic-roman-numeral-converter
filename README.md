@@ -1,7 +1,7 @@
 # Arabic to Roman Numeral Web App
 
 ## How to run the front end
- - `cd ./arabic-roman-numbers/webapp`
+ - `cd ./arabic-roman-numeral-converter/webapp`
  - `npm start`
  - Runs on create react app on port 3000
 
@@ -11,7 +11,7 @@
  - Uses nodemon to run the express nodeJS api
 
 ## How to run the back end tests
- - `cd ./arabic-roman-numbers/server`
+ - `cd ./arabic-roman-numeral-converter/server`
  - `npm test`
  - Tests use jest and supertest with module types for imports
 
